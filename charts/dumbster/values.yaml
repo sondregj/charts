@@ -4,7 +4,13 @@ image:
 
 replicaCount: 1
 
+job:
+  name: ""
+
 backup:
+  schedule: "@daily"
+  retention-days: 30
+
   source:
     postgres:
 

@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: dumpster
-        image: stacc.azurecr.io/sail/dumpster:latest
+        image: sondregj/dumbster:latest
         imagePullPolicy: Always
         env:
         - name: DUMPSTER_METHOD
