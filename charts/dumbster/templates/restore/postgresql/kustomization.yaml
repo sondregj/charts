@@ -1,0 +1,17 @@
+---
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+resources:
+  - dumpster-job.yaml
+
+secretGenerator:
+  - name: dumpster-secret
+    envs:
+      - dumpster.secret.env
+
+configMapGenerator:
+  - name: dumpster-config
+    literals:
+      - dumpster_dbms=pgsql
+      - dumpster_method=restore

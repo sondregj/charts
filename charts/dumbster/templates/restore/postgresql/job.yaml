@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dumpster
+spec:
+  template:
+    spec:
+      containers:
+      - name: dumpster
+        image: stacc.azurecr.io/sail/dumpster:latest
+        imagePullPolicy: Always
+        env:
+        - name: DUMPSTER_METHOD
+          valueFrom:
+            configMapKeyRef:
+              name: dumpster-config
+              key: dumpster_method
+        - name: DUMPSTER_DBMS
+          valueFrom:
+            configMapKeyRef:
+              name: dumpster-config
+              key: dumpster_dbms
+        - name: DUMPSTER_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: dumpster-secret
+              key: dumpster_connection_string
+        - name: DUMPSTER_RESTORE_FILES
+          valueFrom:
+            secretKeyRef:
+              name: dumpster-secret
+              key: dumpster_restore_files
+        - name: DUMPSTER_MOUNT_PATH
+          valueFrom:
+            secretKeyRef:
+              name: dumpster-secret
+              key: dumpster_mount_path
+        volumeMounts: []
+      volumes: []
+      restartPolicy: Never

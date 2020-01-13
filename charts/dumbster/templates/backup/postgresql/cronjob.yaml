@@ -1,0 +1,49 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dumpster
+spec:
+  schedule: "@daily"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: dumpster
+            image: sondregj/dumbster:latest
+            imagePullPolicy: Always
+            env:
+            - name: DUMPSTER_METHOD
+              valueFrom:
+                configMapKeyRef:
+                  name: dumpster-config
+                  key: dumpster_method
+            - name: DUMPSTER_DBMS
+              valueFrom:
+                configMapKeyRef:
+                  name: dumpster-config
+                  key: dumpster_dbms
+            - name: DUMPSTER_BACKUPS_MAX_AGE
+              valueFrom:
+                secretKeyRef:
+                  name: dumpster-secret
+                  key: dumpster_backups_max_age
+            - name: DUMPSTER_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: dumpster-secret
+                  key: dumpster_connection_string
+            - name: DUMPSTER_MOUNT_PATH
+              valueFrom:
+                secretKeyRef:
+                  name: dumpster-secret
+                  key: dumpster_mount_path
+            - name: DUMPSTER_DATABASES
+              valueFrom:
+                secretKeyRef:
+                  name: dumpster-secret
+                  key: dumpster_databases
+            volumeMounts: []
+          volumes: []
+          restartPolicy: Never

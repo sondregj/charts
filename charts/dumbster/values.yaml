@@ -1,0 +1,20 @@
+image:
+  repository: sondregj/dumbster
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+backup:
+  source:
+    postgres:
+
+  destination:
+    blob-storage:
+
+restore:
+  source:
+    blob-storage:
+
+  destination:
+    postgres:
+
