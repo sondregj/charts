@@ -8,16 +8,26 @@ job:
   name: ""
 
 backup:
+  enabled: false
+
   schedule: "@daily"
   retention-days: 30
 
   source:
     postgres:
+      enabled: false
+      secrets:
+      valuesFrom:
+        secret: ""
+
+    mongodb:
+      enabled: false
 
   destination:
     blob-storage:
 
 restore:
+
   source:
     blob-storage:
 
