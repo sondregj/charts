@@ -25,16 +25,16 @@ backup:
     mongodb:
       enabled: false
 
-    blobStorage:
+    azureFile:
       enabled: false
 
   destination:
     azureFile:
       enabled: false
       mountPath: "/"
-      secretName: {{ .Values.api.azureFile.secretName }}
-      shareName: {{ .Values.api.azureFile.shareName }}
-      readOnly: {{ .Values.api.azureFile.readOnly }}
+      secretName: dumbster-azurefile-secret
+      shareName: dumbster-azurefile-sharename
+      readOnly: false
 
 restore:
   enabled: false
@@ -42,14 +42,14 @@ restore:
   source:
     azureFile:
       mountPath: "/"
-      secretName: {{ .Values.api.azureFile.secretName }}
-      shareName: {{ .Values.api.azureFile.shareName }}
-      readOnly: {{ .Values.api.azureFile.readOnly }}
+      secretName: dumbster-azurefile-secret
+      shareName: dumbster-azurefile-sharename
+      readOnly: false
 
   destination:
     postgres:
       enabled: false
-    blob-storage:
+    azureFile:
       enabled: false
     mongodb:
       enabled: false
