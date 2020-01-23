@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{.Chart.Name}}-deployment
   labels:
-    {{- include "posts-service.labels" . | nindent 4 }}
+    name: {{.Chart.Name}}-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -19,3 +19,19 @@ spec:
         image: sondregj/posts-service:latest
         ports:
         - containerPort: 80
+        env:
+        - name: PG_USER
+          valueFrom:
+            secretKeyRef: {{ .Values.postgres.user }}
+        - name: PG_HOST
+          valueFrom:
+            secretKeyRef: {{.Values.postgres.host}}
+        - name: PG_DATABASE
+          valueFrom:
+            secretKeyRef: {{.Values.postgres.database}}
+        - name: PG_PASSWORD
+          valueFrom:
+            secretKeyRef: {{.Values.postgres.password}}
+
+        - name: PG_PORT
+          value: {{.Values.postgres.port}}
