@@ -22,16 +22,24 @@ spec:
         env:
         - name: PG_USER
           valueFrom:
-            secretKeyRef: {{ .Values.postgres.user }}
+            secretKeyRef: 
+              name: {{ .Values.postgres.secretName }}
+              key: user
         - name: PG_HOST
           valueFrom:
-            secretKeyRef: {{.Values.postgres.host}}
+            secretKeyRef: 
+              name: {{.Values.postgres.host}}
+              key: host
         - name: PG_DATABASE
           valueFrom:
-            secretKeyRef: {{.Values.postgres.database}}
+            secretKeyRef: 
+              name: {{.Values.postgres.database.valueFrom.secretKeyRef }}
+              key: database
         - name: PG_PASSWORD
           valueFrom:
-            secretKeyRef: {{.Values.postgres.password}}
+            secretKeyRef: 
+              name: {{.Values.postgres.password}}
+              key: password
 
         - name: PG_PORT
           value: {{.Values.postgres.port}}

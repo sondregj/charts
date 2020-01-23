@@ -23,26 +23,7 @@ ingress:
   #      - chart-example.local
 
 postgres:
-  user: 
-    valueFrom:
-      secretKeyRef:
-        name: ""
-        key: ""
-  host:
-   valueFrom:
-      secretKeyRef:
-        name: ""
-        key: ""
-  database: 
-   valueFrom:
-      secretKeyRef:
-        name: ""
-        key: ""
-  password:  
-    valueFrom:
-      secretKeyRef:
-        name: ""
-        key: ""
+  secretName: postgres-secret
   port: 5432
 
 resources: {}
