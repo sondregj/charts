@@ -1,3 +1,4 @@
+{{ if .Values.backup.postgres.enabled }}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -15,31 +16,27 @@ spec:
             env:
             - name: DUMPSTER_METHOD
               value: dump
-
             - name: DUMPSTER_DBMS
               value: pgsql
-
             - name: DUMPSTER_BACKUPS_MAX_AGE
-              value: {{.Values.backup.retention-days}}
-
+              value: {{.Values.backup.retentionDays}}
             - name: DUMPSTER_CONNECTION_STRING
               valueFrom:
-                secretKeyRef:
-                  name: dumpster-secret
-                  key: dumpster_connection_string
-
-            - name: DUMPSTER_MOUNT_PATH
-              valueFrom:
-                secretKeyRef:
-                  name: dumpster-secret
-                  key: dumpster_mount_path
-
+                secretKeyRef: {{.Values.backup.postgres.valueFrom.secretKeyRef}}
             - name: DUMPSTER_DATABASES
-              valueFrom:
-                secretKeyRef:
-                  name: dumpster-secret
-                  key: dumpster_databases
+              value: {{.Values.backup.postgres.databases}}
+            
+            - name: DUMPSTER_MOUNT_PATH
+              value: {{.Values.backup.destination.azureFile.mountPath}}
 
-            volumeMounts: []
-          volumes: []
+            volumeMounts: 
+              - name: backup-storage
+                mountPath: {{.Values.backup.destination.azureFile.mountPath}}
+          volumes: 
+            - name: backup-storage
+              azureFile:
+                secretName: {{ .Values.backup.destination.azureFile.secretName }}
+                shareName: {{ .Values.backup.destination.azureFile.shareName }}
+                readOnly: {{ .Values.backup.destination.azureFile.readOnly }}
           restartPolicy: Never
+{{ end }}
