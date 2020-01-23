@@ -1,8 +1,8 @@
+# replicaCount: 1
+
 image:
   repository: sondregj/dumbster
   pullPolicy: IfNotPresent
-
-replicaCount: 1
 
 job:
   name: ""
@@ -11,26 +11,46 @@ backup:
   enabled: false
 
   schedule: "@daily"
-  retention-days: 30
+  retentionDays: 30
 
   source:
     postgres:
       enabled: false
       secrets:
-      valuesFrom:
-        secret: ""
+      valueFrom:
+        secretKeyRef:
+          name: ""
+          key: ""
 
     mongodb:
       enabled: false
 
+    blobStorage:
+      enabled: false
+
   destination:
-    blob-storage:
+    azureFile:
+      enabled: false
+      mountPath: "/"
+      secretName: {{ .Values.api.azureFile.secretName }}
+      shareName: {{ .Values.api.azureFile.shareName }}
+      readOnly: {{ .Values.api.azureFile.readOnly }}
 
 restore:
-
+  enabled: false
+  
   source:
-    blob-storage:
+    azureFile:
+      mountPath: "/"
+      secretName: {{ .Values.api.azureFile.secretName }}
+      shareName: {{ .Values.api.azureFile.shareName }}
+      readOnly: {{ .Values.api.azureFile.readOnly }}
 
   destination:
     postgres:
-
+      enabled: false
+    blob-storage:
+      enabled: false
+    mongodb:
+      enabled: false
+    
