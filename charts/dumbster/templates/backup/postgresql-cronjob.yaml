@@ -4,9 +4,11 @@ kind: CronJob
 metadata:
   name: {{.Values.job.name}}-dumbster-postgres-backup
 spec:
-  schedule: {{.Values.backup.schedule | quote}} 
+  schedule: {{.Values.backup.schedule | quote}}
   jobTemplate:
     spec:
+      ttlSecondsAfterFinished: 180
+      backoffLimit: 1
       template:
         spec:
           containers:
