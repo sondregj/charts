@@ -42,4 +42,4 @@ spec:
               key: password
 
         - name: PG_PORT
-          value: {{.Values.postgres.port}}
+          value: {{.Values.postgres.port | toString}}
