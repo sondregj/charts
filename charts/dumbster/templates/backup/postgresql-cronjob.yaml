@@ -7,19 +7,21 @@ spec:
   schedule: {{.Values.backup.schedule | quote}}
   jobTemplate:
     spec:
-      ttlSecondsAfterFinished: 180
-      backoffLimit: 1
+      ttlSecondsAfterFinished: {{.Values.job.ttlSecondsAfterFinished}}
+      backoffLimit: {{.Values.job.backoffLimit}}
       template:
         spec:
           containers:
           - name: dumbster
-            image: sondregj/dumbster:latest
-            imagePullPolicy: Always
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{.Values.image.imagePullPolicy}}
+
             env:
             - name: DUMPSTER_METHOD
               value: dump
             - name: DUMPSTER_DBMS
               value: pgsql
+
             - name: DUMPSTER_BACKUPS_MAX_AGE
               value: {{.Values.backup.retentionDays | quote}}
             - name: DUMPSTER_CONNECTION_STRING
@@ -27,6 +29,7 @@ spec:
                 secretKeyRef: 
                   name: {{.Values.backup.source.postgres.secretName}}
                   key: connectionString
+
             - name: DUMPSTER_DATABASES
               value: {{.Values.backup.source.postgres.databases | join " "}}
             

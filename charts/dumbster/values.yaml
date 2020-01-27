@@ -1,9 +1,12 @@
 image:
   repository: sondregj/dumbster
+  tag: latest
   pullPolicy: IfNotPresent
 
 job:
   name: ""
+  ttlSecondsAfterFinished: 180
+  backoffLimit: 1
 
 backup:
   enabled: false
