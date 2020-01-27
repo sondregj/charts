@@ -28,17 +28,17 @@ spec:
         - name: PG_HOST
           valueFrom:
             secretKeyRef: 
-              name: {{.Values.postgres.host}}
+              name: {{ .Values.postgres.secretName }}
               key: host
         - name: PG_DATABASE
           valueFrom:
             secretKeyRef: 
-              name: {{.Values.postgres.database.valueFrom.secretKeyRef }}
+              name: {{ .Values.postgres.secretName }}
               key: database
         - name: PG_PASSWORD
           valueFrom:
             secretKeyRef: 
-              name: {{.Values.postgres.password}}
+              name: {{ .Values.postgres.secretName }}
               key: password
 
         - name: PG_PORT
