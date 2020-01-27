@@ -5,6 +5,7 @@ metadata:
   name: {{.Values.job.name}}-dumbster-postgres-backup
 spec:
   schedule: {{.Values.backup.schedule | quote}}
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       ttlSecondsAfterFinished: {{.Values.job.ttlSecondsAfterFinished}}
