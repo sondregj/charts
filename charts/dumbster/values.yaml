@@ -1,5 +1,3 @@
-# replicaCount: 1
-
 image:
   repository: sondregj/dumbster
   pullPolicy: IfNotPresent
@@ -16,11 +14,7 @@ backup:
   source:
     postgres:
       enabled: false
-      secrets:
-      valueFrom:
-        secretKeyRef:
-          name: ""
-          key: ""
+      secretName: dumbster-secret-postgres # connectionString
 
     mongodb:
       enabled: false
@@ -30,7 +24,7 @@ backup:
 
   destination:
     azureFile:
-      enabled: false
+      # enabled: false
       mountPath: "/"
       secretName: dumbster-azurefile-secret
       shareName: dumbster-azurefile-sharename
