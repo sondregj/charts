@@ -3,6 +3,22 @@ entries:
   dumbster:
   - apiVersion: v1
     appVersion: 1.16.0
+    created: "2020-01-27T09:18:49.662525005Z"
+    description: Dumbster is a tool for making backups of databases and file storages.
+    digest: 4e8143125104a4789ba1234e032ceb7e5ffacdb1e2eab8cfd99ff8c0f4e82dff
+    home: https://github.com/sondregj/backup-restore-poc
+    maintainers:
+    - email: sondreg@stacc.com
+      name: Sondre Gjellestad
+      url: https://github.com/sondregj
+    name: dumbster
+    sources:
+    - https://github.com/sondregj/backup-restore-poc
+    urls:
+    - https://github.com/sondregj/charts/releases/download/dumbster-0.1.4/dumbster-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v1
+    appVersion: 1.16.0
     created: "2020-01-27T09:12:07.565263734Z"
     description: Dumbster is a tool for making backups of databases and file storages.
     digest: 600c61ae113d51331cce5985c0f6d2a61ef00a5743aeafe20372634333abd0f0
