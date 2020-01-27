@@ -24,7 +24,7 @@ ingress:
 
 postgres:
   secretName: postgres-secret
-  port: 5432
+  port: "5432"
 
 resources: {}
 
