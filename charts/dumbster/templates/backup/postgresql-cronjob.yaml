@@ -19,7 +19,7 @@ spec:
             - name: DUMPSTER_DBMS
               value: pgsql
             - name: DUMPSTER_BACKUPS_MAX_AGE
-              value: {{.Values.backup.retentionDays}}
+              value: {{.Values.backup.retentionDays | quote}}
             - name: DUMPSTER_CONNECTION_STRING
               valueFrom:
                 secretKeyRef: 
