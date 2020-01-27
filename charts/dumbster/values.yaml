@@ -14,6 +14,7 @@ backup:
   source:
     postgres:
       enabled: false
+      databases: []
       secretName: dumbster-secret-postgres # connectionString
 
     mongodb:
