@@ -164,6 +164,22 @@ entries:
   posts-service:
   - apiVersion: v1
     appVersion: 1.16.0
+    created: "2020-01-27T14:55:57.521310567Z"
+    description: Posts Service
+    digest: 1d1578cbcf36b4d08893bee7843717b59671739720af2fc3e2864885adac2526
+    home: https://github.com/sondregj/backup-restore-poc
+    maintainers:
+    - email: sondreg@stacc.com
+      name: Sondre Gjellestad
+      url: https://github.com/sondregj
+    name: posts-service
+    sources:
+    - https://github.com/sondregj/backup-restore-poc
+    urls:
+    - https://github.com/sondregj/charts/releases/download/posts-service-0.1.9/posts-service-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v1
+    appVersion: 1.16.0
     created: "2020-01-27T10:12:33.17584645Z"
     description: Posts Service
     digest: 83e79a9e8ae4bc59bd866e453e1a19ac7ace61604892cadcd1de4f5b50204be7
