@@ -26,12 +26,13 @@ backup:
 
     azureFile:
       enabled: false
+      secretName: dumbster-secret-azurefile
 
   destination:
     azureFile:
       # enabled: false
       mountPath: "/"
-      secretName: dumbster-azurefile-secret
+      secretName: dumbster-secret-azurefile-backup
       shareName: dumbster-azurefile-sharename
       readOnly: false
 
@@ -41,15 +42,21 @@ restore:
   source:
     azureFile:
       mountPath: "/"
-      secretName: dumbster-azurefile-secret
+      secretName: dumbster-secret-azurefile-backup
       shareName: dumbster-azurefile-sharename
       readOnly: false
 
   destination:
     postgres:
       enabled: false
+      secretName: ""
+      restoreFile: ""
     azureFile:
       enabled: false
+      secretName: ""
     mongodb:
       enabled: false
+      secretName: ""
+      restoreFile: ""
+      cosmosDB: false
     
